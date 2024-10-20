@@ -6,39 +6,55 @@ import {
   NavigationMenuList,
   NavigationMenuItem,
   NavigationMenuLink,
-  navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useDynamicContext, DynamicWidget } from "@dynamic-labs/sdk-react-core";
+import { useEffect } from "react";
 
-const BaseHeader = ({ isLoggedIn = false }) => {
+const BaseHeader = () => {
+  const { user } = useDynamicContext();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (window.location.pathname === "/" && user) {
+      navigate("/home");
+    }
+
+    if (window.location.pathname !== "/" && !user) {
+      navigate("/");
+    }
+  }, [user, navigate]);
+
   return (
-    <div className="flex flex-row justify-between items-center p-4 bg-black gap-4 absolute w-full">
+    <div className="flex flex-row justify-between items-center p-4 bg-black gap-4 absolute w-full border-b-white border-b-1 border-solid">
       {/* Logo and Menu */}
       <div className="flex items-center space-x-4">
         <div className="logo">
-          <img src={logo} alt="logo" />
+          <Link to="/">
+            <img src={logo} alt="logo" />
+          </Link>
         </div>
-        {isLoggedIn && (
+        {user && (
           <NavigationMenu>
             <NavigationMenuList>
-              <NavigationMenuItem>
-                <Link href="/docs" legacyBehavior passHref>
-                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+              <NavigationMenuItem className="bg-[#1b1b1b] text-white flex flex-row gap-4">
+                <Link to="/home" legacyBehavior passHref>
+                  <NavigationMenuLink className={` bg-[#1b1b1b] text-white`}>
                     Home
                   </NavigationMenuLink>
                 </Link>
-                <Link href="/docs" legacyBehavior passHref>
-                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                    My
+                <Link to="/my" legacyBehavior passHref>
+                  <NavigationMenuLink className={` bg-[#1b1b1b] text-white`}>
+                    MY
                   </NavigationMenuLink>
                 </Link>
-                <Link href="/docs" legacyBehavior passHref>
-                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                <Link to="/talk" legacyBehavior passHref>
+                  <NavigationMenuLink className={` bg-[#1b1b1b] text-white`}>
                     Talk
                   </NavigationMenuLink>
                 </Link>
-                <Link href="/docs" legacyBehavior passHref>
-                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                <Link to="/about" legacyBehavior passHref>
+                  <NavigationMenuLink className={` bg-[#1b1b1b] text-white`}>
                     About
                   </NavigationMenuLink>
                 </Link>
@@ -48,27 +64,16 @@ const BaseHeader = ({ isLoggedIn = false }) => {
         )}
       </div>
 
-      {/* Search */}
-      {isLoggedIn && (
-        <div className="flex items-center">
-          <input
-            type="text"
-            placeholder="Search"
-            className="border rounded-full p-2 bg-gray-800 text-white"
-          />
-          <Button className="ml-2">🔍</Button> {/* Use shadcn Button */}
-        </div>
-      )}
-
       {/* Two Buttons */}
-      {isLoggedIn && (
+      {user && (
         <div className="flex items-center space-x-4">
-          <Button className="bg-gradient-to-r from-[#4620DD] to-[#801AE5] hover:from-[#3D1CC5] hover:to-[#7017CC] text-white px-4 py-2 rounded-full">
+          <Button
+            onClick={() => navigate("/avagen")}
+            className="bg-gradient-to-r from-[#4620DD] to-[#801AE5] hover:from-[#3D1CC5] hover:to-[#7017CC] text-white px-4 py-2 rounded-full"
+          >
             Create
           </Button>
-          <Button className="bg-gray-700 text-white px-4 py-2 rounded-full">
-            My Profile
-          </Button>
+          <DynamicWidget />
         </div>
       )}
     </div>

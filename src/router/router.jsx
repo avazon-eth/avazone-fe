@@ -1,11 +1,9 @@
 import { createBrowserRouter } from "react-router-dom";
 import { BaseLayout } from "@/common/components";
 import { IntroPage } from "@/pages/IntroPage";
-import { GoogleOAuthHandler } from "@/pages/GoogleOauthHandler";
 import { HomePage } from "@/pages/HomePage";
-import { ProfilePage } from "@/pages/ProfilePage";
 import { AvagenPage } from "@/pages/AvagenPage";
-
+import { LicensePage } from "@/pages/LicensePage";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -16,10 +14,6 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: "/oauth/google",
-    element: <GoogleOAuthHandler />,
-  },
-  {
     path: "/home",
     element: (
       <BaseLayout>
@@ -28,18 +22,18 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: "/profile",
-    element: (
-      <BaseLayout>
-        <ProfilePage />
-      </BaseLayout>
-    ),
-  },
-  {
     path: "/avagen",
     element: (
       <BaseLayout>
         <AvagenPage />
+      </BaseLayout>
+    ),
+  },
+  {
+    path: "/set-license",
+    element: (
+      <BaseLayout>
+        <LicensePage />
       </BaseLayout>
     ),
   },

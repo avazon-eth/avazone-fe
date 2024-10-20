@@ -1,0 +1,43 @@
+[
+  {
+    "type": "non-commercial",
+    "title": "Non-Commercial social remixing",
+    "description": "This license allows for endless free remixing while tracking all uses of your work while giving you full credit.",
+    "details": {
+      "can": [
+        "Credit you appropriately",
+        "Remix this work",
+        "Enforce that derivatives have the same License Terms that you provide them"
+      ],
+      "cannot": ["Commercialize the remix"],
+      "notes": ["This license never expires"]
+    }
+  },
+  {
+    "type": "commercial",
+    "title": "Commercial Use",
+    "description": "Retain control over reuse of your work, while allowing anyone to use the work in exchange for the economic terms you set.",
+    "details": {
+      "can": [
+        "Commercialize the remix",
+        "Credit you appropriately",
+        "Remix this work"
+      ],
+      "notes": ["This license never expires"]
+    }
+  },
+  {
+    "type": "remix",
+    "title": "Commercial remix",
+    "description": "Endless free remixing while tracking all uses of your work while giving you full credit, with each derivative paying a percentage of revenue to its 'parent' IP.",
+    "details": {
+      "can": [
+        "Commercialize the remix",
+        "Credit you appropriately",
+        "Remix this work",
+        "Enforce that derivatives have the same License Terms that you provide them"
+      ],
+      "notes": ["This license never expires"]
+    }
+  }
+]
