@@ -1,15 +1,21 @@
-import { create } from "ipfs-http-client";
-
-const ipfs = create(
-  "https://shelter-finish-full.quicknode-ipfs.com/ipfs/api/v0"
-);
+import axios from "axios";
 
 export const uploadToIPFS = async (metadata) => {
   try {
-    const result = await ipfs.add(JSON.stringify(metadata));
-    return `https://shelter-finish-full.quicknode-ipfs.com/ipfs/${result.path}`;
+    // Upload file to QuickNode's IPFS gateway
+    const response = await axios.post(
+      "https://shelter-finish-full.quicknode-ipfs.com/ipfs/api/v0/add",
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+    const ipfsHash = metadata.Hash;
+    const fileUrl = `https://shelter-finish-full.quicknode-ipfs.com/ipfs/${ipfsHash}`;
+    return fileUrl;
   } catch (error) {
-    console.error("Error uploading to IPFS:", error);
-    throw error;
+    console.error("Error uploading file to IPFS: ", error);
   }
 };
