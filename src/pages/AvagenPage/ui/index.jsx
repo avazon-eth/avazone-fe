@@ -12,9 +12,12 @@ const AvagenPage = () => {
   useEffect(() => {
     const getToken = async () => {
       try {
-        const res = await putToken("replace later");
+        const accessToken = localStorage.getItem(
+          "dynamic_min_authentication_token"
+        );
+        const res = await putToken(accessToken);
         setGenURI(
-          `https://staging.d9xje8vs9f8su.amplifyapp.com/#/?token=${res.token_key}`
+          `https://staging.d9xje8vs9f8su.amplifyapp.com/#/${res.token_key}`
         );
         setSessionId(res.data_session_id);
         console.log(res);
